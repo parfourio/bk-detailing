@@ -1,2 +1,2 @@
 [deploy]
-startCommand = "npx serve . -p $PORT"
+startCommand = "node server.js"
