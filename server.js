@@ -7,11 +7,15 @@ const PORT = process.env.PORT || 3000;
 const CANONICAL = 'bk.parfour.io';
 
 app.use((req, res, next) => {
-  const host = req.headers.host;
-  const proto = req.headers['x-forwarded-proto'];
+  // Railway may use x-forwarded-host for the original hostname
+  const host = req.headers['x-forwarded-host'] || req.headers.host || '';
+  const proto = req.headers['x-forwarded-proto'] || 'https';
 
-  // Redirect any non-canonical host → bk.parfour.io
-  if (host && host !== CANONICAL) {
+  // Log headers so we can debug
+  console.log('host:', host, '| proto:', proto, '| x-forwarded-host:', req.headers['x-forwarded-host']);
+
+  // Redirect non-canonical host → bk.parfour.io
+  if (host && !host.includes(CANONICAL)) {
     return res.redirect(301, 'https://' + CANONICAL + req.url);
   }
 
