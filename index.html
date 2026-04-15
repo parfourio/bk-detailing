@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BK Detailing | Premium Car Wash & Detailing · Broward County, FL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:     #07090d;
+      --dark:      #0e1117;
+      --dark-card: #161b25;
+      --dark-border:#222836;
+      --blue:      #1e6fd9;
+      --blue-light:#3b8cf0;
+      --blue-dark: #1455aa;
+      --blue-pale: rgba(30,111,217,0.1);
+      --white:     #f0f4ff;
+      --white-mid: rgba(240,244,255,0.65);
+      --white-dim: rgba(240,244,255,0.28);
+      --gd:        rgba(240,244,255,0.03);
+      --gl:        rgba(7,9,13,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
+
+    .grid-dark { background-image: linear-gradient(var(--gd) 1px,transparent 1px),linear-gradient(90deg,var(--gd) 1px,transparent 1px); background-size: 72px 72px; }
+    .grid-light { background-color: #eef2ff; background-image: linear-gradient(var(--gl) 1px,transparent 1px),linear-gradient(90deg,var(--gl) 1px,transparent 1px); background-size: 72px 72px; }
+
+    /* NAV */
+    .site-nav { position: sticky; top: 0; z-index: 900; background: rgba(7,9,13,0.97); backdrop-filter: blur(12px); border-bottom: 2px solid var(--blue); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.1em; color: var(--white); text-decoration: none; line-height: 1; }
+    .nav-logo span { color: var(--blue-light); }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--white-mid); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--blue-light); }
+    .nav-links .nav-cta a { background: var(--blue); color: #fff; padding: 8px 18px; border-radius: 4px; transition: background 0.2s; }
+    .nav-links .nav-cta a:hover { background: var(--blue-light); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 1px; transition: transform 0.3s,opacity 0.3s; transform-origin: center; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* HERO */
+    .hero { min-height: 92vh; position: relative; display: flex; align-items: flex-end; overflow: hidden; background: var(--black); }
+    .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; filter: brightness(0.75) contrast(1.1); }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to right, rgba(7,9,13,0.95) 28%, rgba(7,9,13,0.5) 60%, rgba(7,9,13,0.2) 100%),
+        linear-gradient(to top, rgba(7,9,13,1) 0%, transparent 45%);
+      z-index: 1;
+    }
+    .hero-content { position: relative; z-index: 2; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px 72px; }
+    .hero-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .hero-eyebrow-line { width: 40px; height: 1px; background: var(--blue-light); }
+    .hero-eyebrow-text { font-size: 10px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--blue-light); }
+    .hero-name-small { font-family: 'Bebas Neue', sans-serif; font-size: clamp(28px,3.5vw,44px); letter-spacing: 0.18em; color: var(--blue-light); display: block; margin-bottom: 8px; }
+    .hero-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(64px,10vw,130px); line-height: 0.88; letter-spacing: 0.03em; color: var(--white); margin-bottom: 4px; }
+    .hero-divider { width: 72px; height: 2px; background: linear-gradient(90deg, var(--blue), transparent); margin: 20px 0; }
+    .hero-desc { font-size: 16px; color: var(--white-mid); max-width: 500px; line-height: 1.75; margin-bottom: 36px; font-weight: 300; }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-blue { display: inline-block; background: var(--blue); color: #fff; padding: 14px 32px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: background 0.2s,transform 0.15s; }
+    .btn-blue:hover { background: var(--blue-light); transform: translateY(-1px); }
+    .btn-ghost { display: inline-block; border: 1px solid rgba(240,244,255,0.25); color: var(--white-mid); padding: 14px 32px; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: border-color 0.2s,color 0.2s; }
+    .btn-ghost:hover { border-color: var(--blue-light); color: var(--blue-light); }
+
+    /* TICKER */
+    .ticker { background: var(--blue); overflow: hidden; padding: 10px 0; }
+    .ticker-track { display: flex; animation: ticker 28s linear infinite; width: max-content; }
+    .ticker-item { font-size: 11px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; padding: 0 28px; white-space: nowrap; }
+    .ticker-sep { color: rgba(255,255,255,0.35); padding: 0 8px; }
+    @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* STATS — light */
+    .stats-section { border-bottom: 1px solid rgba(7,9,13,0.12); }
+    .stats-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); }
+    .stat-item { padding: 36px 20px; text-align: center; border-right: 1px solid rgba(7,9,13,0.1); position: relative; }
+    .stat-item:last-child { border-right: none; }
+    .stat-item::after { content:''; position:absolute; bottom:0; left:20%; right:20%; height:2px; background:var(--blue); opacity:0.4; }
+    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--blue-dark); line-height: 1; margin-bottom: 6px; letter-spacing: 0.02em; }
+    .stat-label { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(7,9,13,0.4); }
+
+    /* SHARED */
+    section { scroll-margin-top: 64px; }
+    .eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .eyebrow-line { width: 28px; height: 1px; background: var(--blue); }
+    .eyebrow-text { font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue-light); }
+    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px,5.5vw,72px); line-height: 0.92; letter-spacing: 0.02em; color: var(--white); margin-top: 8px; }
+    .section-title span { color: var(--blue-light); }
+
+    /* SERVICES — dark grid */
+    .services-section { padding: 100px 24px; }
+    .services-inner { max-width: 1200px; margin: 0 auto; }
+    .services-header { text-align: center; margin-bottom: 56px; }
+    .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .service-card { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: 8px; padding: 32px 28px; position: relative; overflow: hidden; transition: border-color 0.25s,transform 0.25s; }
+    .service-card:hover { border-color: rgba(30,111,217,0.45); transform: translateY(-3px); }
+    .service-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--blue),var(--blue-light)); border-radius:8px 8px 0 0; }
+    .service-icon { font-size: 36px; margin-bottom: 16px; display: block; }
+    .service-tag { font-size: 9px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue-light); margin-bottom: 8px; display: block; }
+    .service-name { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--white); letter-spacing: 0.04em; margin-bottom: 10px; line-height: 1; }
+    .service-desc { font-size: 13px; color: var(--white-mid); line-height: 1.65; margin-bottom: 16px; }
+    .service-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--blue); color: #fff; padding: 9px 18px; border-radius: 4px; text-decoration: none; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; transition: background 0.2s; }
+    .service-cta:hover { background: var(--blue-light); }
+
+    /* PHOTO DIVIDER */
+    .photo-divider { height: 50vh; min-height: 340px; position: relative; overflow: hidden; }
+    .photo-divider img { width: 100%; height: 100%; object-fit: cover; object-position: center 50%; filter: brightness(0.8) contrast(1.05); }
+    .photo-divider-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom,rgba(7,9,13,0.55) 0%,rgba(7,9,13,0.1) 40%,rgba(7,9,13,0.1) 60%,rgba(7,9,13,0.7) 100%); display: flex; align-items: center; justify-content: center; }
+    .photo-divider-text { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px,8vw,100px); color: #fff; text-align: center; line-height: 0.95; letter-spacing: 0.06em; text-shadow: 0 4px 40px rgba(0,0,0,0.7); }
+    .photo-divider-text span { color: var(--blue-light); display: block; }
+
+    /* PRICING — light grid */
+    .pricing-section { padding: 100px 24px; }
+    .pricing-inner { max-width: 1200px; margin: 0 auto; }
+    .pricing-header { text-align: center; margin-bottom: 56px; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; }
+    .pricing-card { background: #fff; border: 1px solid rgba(7,9,13,0.1); border-radius: 8px; overflow: hidden; box-shadow: 0 4px 20px rgba(7,9,13,0.06); }
+    .pricing-card-header { background: var(--blue); padding: 20px 28px; }
+    .pricing-card-header h3 { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: #fff; letter-spacing: 0.06em; }
+    .pricing-card-header p { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 2px; }
+    .pricing-card-body { padding: 24px 28px; }
+    .price-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(7,9,13,0.07); font-size: 14px; color: rgba(7,9,13,0.75); }
+    .price-row:last-child { border-bottom: none; }
+    .price-row strong { color: var(--black); font-weight: 600; }
+    .price-amount { font-weight: 700; color: var(--blue-dark); white-space: nowrap; }
+    .pricing-cta { padding: 0 28px 24px; }
+
+    /* VIP BAND — blue band */
+    .vip-band { background: var(--blue); padding: 72px 24px; position: relative; overflow: hidden; }
+    .vip-band::before { content:'VIP'; position:absolute; top:-40px; right:-30px; font-family:'Bebas Neue',sans-serif; font-size:300px; color:rgba(255,255,255,0.06); line-height:1; pointer-events:none; letter-spacing:0.04em; }
+    .vip-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 1; }
+    .vip-left h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px,8vw,100px); color: #fff; line-height: 0.86; letter-spacing: 0.01em; margin-bottom: 14px; }
+    .vip-left p { font-size: 16px; color: rgba(255,255,255,0.78); line-height: 1.7; margin-bottom: 28px; font-weight: 300; }
+    .btn-white { display: inline-block; background: #fff; color: var(--blue-dark); padding: 14px 32px; font-size: 12px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: background 0.2s; }
+    .btn-white:hover { background: #e8f0ff; }
+    .vip-perks { display: flex; flex-direction: column; gap: 14px; }
+    .vip-perk { display: flex; align-items: center; gap: 14px; font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.88); }
+    .vip-perk-check { width: 24px; height: 24px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; color: #fff; }
+
+    /* EXTRAS — dark grid */
+    .extras-section { padding: 80px 24px; }
+    .extras-inner { max-width: 1200px; margin: 0 auto; }
+    .extras-header { text-align: center; margin-bottom: 48px; }
+    .extras-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; }
+    .extra-item { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: 6px; padding: 20px 16px; text-align: center; transition: border-color 0.2s; }
+    .extra-item:hover { border-color: rgba(30,111,217,0.35); }
+    .extra-name { font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .extra-price { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--blue-light); letter-spacing: 0.04em; }
+
+    /* ABOUT — light grid */
+    .about-section { padding: 100px 24px; }
+    .about-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-right h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px,5.5vw,70px); color: rgba(7,9,13,0.85); line-height: 0.92; letter-spacing: 0.02em; margin-bottom: 20px; }
+    .about-right h2 span { color: var(--blue-dark); }
+    .about-right p { font-size: 15px; color: rgba(7,9,13,0.65); line-height: 1.8; margin-bottom: 14px; font-weight: 400; }
+    .about-cards { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+    .about-card { background: #fff; border: 1px solid rgba(7,9,13,0.1); border-left: 3px solid var(--blue); border-radius: 0 6px 6px 0; padding: 16px 20px; display: flex; align-items: flex-start; gap: 14px; }
+    .about-card-icon { font-size: 22px; flex-shrink: 0; }
+    .about-card-text { font-size: 13px; color: rgba(7,9,13,0.65); line-height: 1.55; }
+    .about-card-text strong { color: rgba(7,9,13,0.85); font-weight: 700; display: block; margin-bottom: 2px; }
+    .about-img { width: 100%; height: 480px; object-fit: cover; border-radius: 8px; display: block; box-shadow: 0 8px 40px rgba(7,9,13,0.12); }
+
+    /* CONTACT — dark grid */
+    .contact-section { padding: 80px 24px; }
+    .contact-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .contact-left h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px,5.5vw,70px); color: var(--white); line-height: 0.92; letter-spacing: 0.02em; margin-bottom: 20px; }
+    .contact-left h2 span { color: var(--blue-light); }
+    .contact-left p { font-size: 15px; color: var(--white-mid); line-height: 1.8; margin-bottom: 28px; font-weight: 300; }
+    .contact-details { display: flex; flex-direction: column; gap: 16px; }
+    .contact-detail { display: flex; gap: 14px; align-items: flex-start; font-size: 14px; color: var(--white-mid); }
+    .contact-detail-icon { color: var(--blue-light); font-size: 18px; flex-shrink: 0; }
+    .contact-form { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: 8px; padding: 36px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--white-dim); margin-bottom: 8px; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; background: var(--dark); border: 1px solid var(--dark-border); border-radius: 4px; padding: 11px 14px; font-size: 14px; color: var(--white); font-family: 'Inter',sans-serif; outline: none; transition: border-color 0.2s; }
+    .form-group input:focus, .form-group textarea:focus { border-color: rgba(30,111,217,0.5); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-group select option { background: var(--dark); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-submit { width: 100%; background: var(--blue); color: #fff; border: none; padding: 13px; font-size: 12px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 4px; cursor: pointer; font-family: 'Inter',sans-serif; transition: background 0.2s; }
+    .form-submit:hover { background: var(--blue-light); }
+
+    /* FOOTER */
+    footer { background: var(--dark); border-top: 2px solid var(--blue); padding: 48px 24px 24px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; padding-bottom: 28px; border-bottom: 1px solid var(--dark-border); margin-bottom: 20px; }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--white); letter-spacing: 0.1em; margin-bottom: 6px; }
+    .footer-logo span { color: var(--blue-light); }
+    .footer-tagline { font-size: 11px; color: var(--white-dim); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+    .footer-col h5 { font-size: 10px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue-light); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { font-size: 13px; color: var(--white-dim); text-decoration: none; transition: color 0.2s; }
+    .footer-col ul a:hover { color: var(--white); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .footer-copy { font-size: 11px; color: var(--white-dim); }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .vip-inner { grid-template-columns: 1fr; gap: 40px; }
+      .extras-grid { grid-template-columns: repeat(3,1fr); }
+      .about-inner, .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(7,9,13,0.1); }
+      .stat-item:nth-child(odd) { border-right: 1px solid rgba(7,9,13,0.1) !important; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+    @media (max-width: 640px) {
+      .hamburger { display: flex; }
+      .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; background: var(--dark); border-top: 2px solid var(--blue); flex-direction: column; padding: 16px 20px; gap: 0; box-shadow: 0 12px 32px rgba(0,0,0,0.7); }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; padding: 12px 0; border-bottom: 1px solid var(--dark-border); font-size: 13px; }
+      .nav-links .nav-cta a { border: none; background: none; color: var(--blue-light); }
+      .hero { min-height: 92vh; }
+      .hero-content { padding: 0 20px 56px; }
+      .hero-name { font-size: clamp(58px,16vw,100px); }
+      .hero-ctas { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .services-section, .pricing-section, .about-section, .contact-section, .extras-section { padding: 60px 20px; }
+      .vip-band { padding: 60px 20px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .extras-grid { grid-template-columns: 1fr 1fr; }
+      .photo-divider { height: 40vh; min-height: 260px; }
+      .photo-divider-text { font-size: clamp(40px,12vw,68px); }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav" id="top">
+    <div class="nav-inner">
+      <a href="#top" class="nav-logo"><span>BK</span> Detailing</a>
+      <button class="hamburger"><span></span><span></span><span></span></button>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li class="nav-cta"><a href="tel:9546841154">Call Now</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <img class="hero-photo" src="https://novatocarwash.com/wp-content/uploads/2024/07/Hero-header-resized.jpg" alt="BK Detailing" />
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><span class="hero-eyebrow-text">Broward County, Florida · Premium Car Care</span></div>
+      <span class="hero-name-small">BK Detailing.</span>
+      <div class="hero-name">Your Car.<br>Our Pride.</div>
+      <div class="hero-divider"></div>
+      <p class="hero-desc">Broward County's go-to for premium car wash and detailing services. From express washes to full interior and exterior detailing — we treat every car like our own.</p>
+      <div class="hero-ctas">
+        <a href="#services" class="btn-blue">See Our Services</a>
+        <a href="tel:9546841154" class="btn-ghost">📞 954.684.1154</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <span class="ticker-item">Full Service Washes</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">Interior &amp; Exterior Detailing</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">Hand Wash Available</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">Buy 3 Get 1 Free</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">Gift Cards Available</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">Broward County, FL</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">Full Service Washes</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">Interior &amp; Exterior Detailing</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">Hand Wash Available</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">Buy 3 Get 1 Free</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">Gift Cards Available</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">Broward County, FL</span><span class="ticker-sep">✦</span>
+    </div>
+  </div>
+
+  <!-- STATS — light -->
+  <div class="stats-section grid-light">
+    <div class="stats-inner">
+      <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">Wash Types</div></div>
+      <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Detail Packages</div></div>
+      <div class="stat-item"><div class="stat-num">Free</div><div class="stat-label">First Class Trial</div></div>
+      <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">Days a Week</div></div>
+    </div>
+  </div>
+
+  <!-- SERVICES — dark grid -->
+  <section class="services-section grid-dark" id="services">
+    <div class="services-inner">
+      <div class="services-header">
+        <div class="eyebrow" style="justify-content:center"><div class="eyebrow-line"></div><span class="eyebrow-text">What We Offer</span><div class="eyebrow-line"></div></div>
+        <h2 class="section-title">Premium <span>Car Care.</span></h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-icon">🚗</span>
+          <span class="service-tag">Most Popular</span>
+          <div class="service-name">Full Service Wash</div>
+          <p class="service-desc">The complete package — thorough exterior wash plus interior vacuum, windows, and wipe-down. Your car comes out looking brand new, inside and out.</p>
+          <a href="#pricing" class="service-cta">View Pricing →</a>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">✨</span>
+          <span class="service-tag">Deep Clean</span>
+          <div class="service-name">Detailing Services</div>
+          <p class="service-desc">From minor touch-ups to comprehensive detail packages, our detailing services restore your car's showroom shine inside and out. By appointment.</p>
+          <a href="tel:9546841154" class="service-cta">Call to Book →</a>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">💦</span>
+          <span class="service-tag">Quick &amp; Clean</span>
+          <div class="service-name">Exterior Wash</div>
+          <p class="service-desc">Just want to keep it simple? Our express exterior wash gets your car sparkling clean fast, without the wait. Perfect for a quick refresh.</p>
+          <a href="#pricing" class="service-cta">View Pricing →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO DIVIDER -->
+  <div class="photo-divider">
+    <img src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=1600&q=80" alt="Car detailing" />
+    <div class="photo-divider-overlay">
+      <div class="photo-divider-text">
+        Every Detail.<br><span>Matters.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRICING — light grid -->
+  <section class="pricing-section grid-light" id="pricing">
+    <div class="pricing-inner">
+      <div class="pricing-header">
+        <div class="eyebrow" style="justify-content:center"><div class="eyebrow-line" style="background:var(--blue-dark)"></div><span class="eyebrow-text" style="color:var(--blue-dark)">Transparent Pricing</span><div class="eyebrow-line" style="background:var(--blue-dark)"></div></div>
+        <h2 class="section-title" style="color:rgba(7,9,13,0.85)">Simple. <span style="color:var(--blue-dark)">Upfront.</span></h2>
+      </div>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-card-header"><h3>Full Service Washes</h3><p>Interior + Exterior</p></div>
+          <div class="pricing-card-body">
+            <div class="price-row"><strong>Small</strong><span class="price-amount">Call for Pricing</span></div>
+            <div class="price-row"><strong>Medium</strong><span class="price-amount">Call for Pricing</span></div>
+            <div class="price-row"><strong>Large</strong><span class="price-amount">Call for Pricing</span></div>
+            <div class="price-row"><strong>SUV / Truck</strong><span class="price-amount">Call for Pricing</span></div>
+          </div>
+          <div class="pricing-cta"><a href="tel:9546841154" class="btn-blue" style="width:100%;text-align:center;display:block">Book Now</a></div>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-card-header"><h3>Exterior Washes</h3><p>Outside Only</p></div>
+          <div class="pricing-card-body">
+            <div class="price-row"><strong>Small</strong><span class="price-amount">Call for Pricing</span></div>
+            <div class="price-row"><strong>Medium</strong><span class="price-amount">Call for Pricing</span></div>
+            <div class="price-row"><strong>Large</strong><span class="price-amount">Call for Pricing</span></div>
+            <div class="price-row"><strong>SUV / Truck</strong><span class="price-amount">Call for Pricing</span></div>
+          </div>
+          <div class="pricing-cta"><a href="tel:9546841154" class="btn-blue" style="width:100%;text-align:center;display:block">Book Now</a></div>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-card-header"><h3>Hand Wash</h3><p>By Appointment Only</p></div>
+          <div class="pricing-card-body">
+            <div class="price-row"><strong>Starting at</strong><span class="price-amount">$60</span></div>
+            <div class="price-row"><strong>Custom quotes available</strong><span class="price-amount">—</span></div>
+          </div>
+          <div class="pricing-cta"><a href="tel:9546841154" class="btn-blue" style="width:100%;text-align:center;display:block">Schedule Today</a></div>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-card-header"><h3>Detailing Packages</h3><p>Full Detail Services</p></div>
+          <div class="pricing-card-body">
+            <div class="price-row"><strong>Interior Detail</strong><span class="price-amount">Call for Quote</span></div>
+            <div class="price-row"><strong>Exterior Detail</strong><span class="price-amount">Call for Quote</span></div>
+            <div class="price-row"><strong>Full Detail</strong><span class="price-amount">Call for Quote</span></div>
+            <div class="price-row"><strong>Seat Shampoo (per seat)</strong><span class="price-amount">$25+</span></div>
+          </div>
+          <div class="pricing-cta"><a href="tel:9546841154" class="btn-blue" style="width:100%;text-align:center;display:block">Call for Quote</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXTRAS — dark grid -->
+  <section class="extras-section grid-dark">
+    <div class="extras-inner">
+      <div class="extras-header">
+        <div class="eyebrow" style="justify-content:center"><div class="eyebrow-line"></div><span class="eyebrow-text">Add-On Services</span><div class="eyebrow-line"></div></div>
+        <h2 class="section-title" style="text-align:center">Extra <span>Services.</span></h2>
+      </div>
+      <div class="extras-grid">
+        <div class="extra-item"><div class="extra-name">Spray Wax</div><div class="extra-price">$25+</div></div>
+        <div class="extra-item"><div class="extra-name">Clear Coat Protectant</div><div class="extra-price">$4</div></div>
+        <div class="extra-item"><div class="extra-name">Exterior Dressing</div><div class="extra-price">$10+</div></div>
+        <div class="extra-item"><div class="extra-name">Floor Mats (Rubber)</div><div class="extra-price">$3 ea</div></div>
+        <div class="extra-item"><div class="extra-name">Floor Mats (Carpet)</div><div class="extra-price">$5 ea</div></div>
+        <div class="extra-item"><div class="extra-name">Air Freshener</div><div class="extra-price">$2</div></div>
+        <div class="extra-item"><div class="extra-name">Express Spray Wax</div><div class="extra-price">$50</div></div>
+        <div class="extra-item"><div class="extra-name">Leather Treatment</div><div class="extra-price">$25+</div></div>
+        <div class="extra-item" style="background:var(--blue-pale);border-color:rgba(30,111,217,0.3)"><div class="extra-name" style="color:var(--blue-light)">Gift Cards</div><div class="extra-price" style="color:var(--blue-light)">Any $</div></div>
+        <div class="extra-item" style="background:var(--blue-pale);border-color:rgba(30,111,217,0.3)"><div class="extra-name" style="color:var(--blue-light)">Fleet Service</div><div class="extra-price" style="color:var(--blue-light)">Quote</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIP BAND -->
+  <section class="vip-band">
+    <div class="vip-inner">
+      <div class="vip-left">
+        <h2>Buy 3.<br>Get 1 Free.</h2>
+        <p>Our BK VIP Wash Card is the smartest way to keep your car clean. Buy three washes and get the fourth completely free — no expiration, no hassle.</p>
+        <a href="tel:9546841154" class="btn-white">Get Your VIP Card</a>
+      </div>
+      <div class="vip-perks">
+        <div class="vip-perk"><div class="vip-perk-check">✓</div>Buy 3 washes, get 1 FREE</div>
+        <div class="vip-perk"><div class="vip-perk-check">✓</div>No personal information recorded</div>
+        <div class="vip-perk"><div class="vip-perk-check">✓</div>Use with any vehicle (same size)</div>
+        <div class="vip-perk"><div class="vip-perk-check">✓</div>Gift cards available for any amount</div>
+        <div class="vip-perk"><div class="vip-perk-check">✓</div>Fleet discounts available — call for quote</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT — light grid -->
+  <section class="about-section grid-light" id="about">
+    <div class="about-inner">
+      <img class="about-img" src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=800&q=80" alt="BK Detailing team" />
+      <div class="about-right">
+        <div class="eyebrow"><div class="eyebrow-line" style="background:var(--blue-dark)"></div><span class="eyebrow-text" style="color:var(--blue-dark)">About BK Detailing</span></div>
+        <h2>Broward's Car<br>Care <span>Experts.</span></h2>
+        <p>BK Detailing is a Broward County-based car wash and detailing business built on one simple promise: we treat every car like our own. Whether it's a quick exterior wash or a full interior detail, we bring the same care and attention to every job.</p>
+        <p>We're proud to serve the Broward County community and look forward to becoming your go-to for car care.</p>
+        <div class="about-cards">
+          <div class="about-card"><div class="about-card-icon">🌿</div><div class="about-card-text"><strong>Eco-Conscious</strong>We minimize water waste and use environmentally responsible products in every wash.</div></div>
+          <div class="about-card"><div class="about-card-icon">🏆</div><div class="about-card-text"><strong>Quality Guaranteed</strong>Not satisfied? We'll make it right — every time, no questions asked.</div></div>
+          <div class="about-card"><div class="about-card-icon">🤝</div><div class="about-card-text"><strong>Community First</strong>Proudly serving Broward County. We support our local community and love our neighbors.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT — dark grid -->
+  <section class="contact-section grid-dark" id="contact">
+    <div class="contact-inner">
+      <div class="contact-left">
+        <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Get in Touch</span></div>
+        <h2>Ready for a<br><span>Clean Ride?</span></h2>
+        <p>Call us to book your wash or detailing appointment, or send us a message and we'll get back to you quickly.</p>
+        <div class="contact-details">
+          <div class="contact-detail"><span class="contact-detail-icon">📍</span><span>Broward County, Florida</span></div>
+          <div class="contact-detail"><span class="contact-detail-icon">📞</span><span><a href="tel:9546841154" style="color:inherit;">954.684.1154</a></span></div>
+          <div class="contact-detail"><span class="contact-detail-icon">🕐</span><span>Monday–Sunday · 8:00 AM – 6:00 PM</span></div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" placeholder="Brandon" /></div>
+          <div class="form-group"><label>Last Name</label><input type="text" placeholder="King" /></div>
+        </div>
+        <div class="form-group"><label>Phone</label><input type="tel" placeholder="(954) 000-0000" /></div>
+        <div class="form-group"><label>Service Needed</label>
+          <select>
+            <option value="">Select a service...</option>
+            <option>Full Service Wash</option>
+            <option>Exterior Wash</option>
+            <option>Hand Wash</option>
+            <option>Interior Detail</option>
+            <option>Full Detail Package</option>
+            <option>Fleet Service Quote</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your car and what you need..."></textarea></div>
+        <button class="form-submit">Send Message</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo"><span>BK</span> Detailing</div>
+        <div class="footer-tagline">Premium Car Wash &amp; Detailing · Broward County, FL</div>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#services">Full Service Wash</a></li>
+          <li><a href="#services">Exterior Wash</a></li>
+          <li><a href="#services">Detailing</a></li>
+          <li><a href="#services">Hand Wash</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Info</h5>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="tel:9546841154">954.684.1154</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-copy">© 2026 BK Detailing · Broward County, Florida · All rights reserved</p>
+  </footer>
+
+  <script>
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); navLinks.classList.toggle('open'); });
+    navLinks.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { hamburger.classList.remove('open'); navLinks.classList.remove('open'); }); });
+  </script>
+</body>
+</html>
